@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
+import {MatDialog} from "@angular/material";
+import { ErrorDialogComponent} from '../error-dialog/error-dialog.component'
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import {Router} from '@angular/router'
 })
 export class LoginComponent {
 
-  constructor(private router : Router) {
+  constructor(private router : Router, public dialog : MatDialog) {
   }
 
   username : string
@@ -20,7 +22,20 @@ export class LoginComponent {
       this.router.navigate(['/user']);
     }
     else {
-      alert("Invalid credentials");
+      // alert("Invalid credentials");
+      this.showError("Invalid credentials");
     }
+  }
+
+  showError(error : string) : void {
+
+    let dialogRef = this.dialog.open(ErrorDialogComponent, {
+      data: {errorMsg: error} ,width : '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed' + result);
+    });
+
   }
 }
