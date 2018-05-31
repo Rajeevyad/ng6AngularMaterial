@@ -15,11 +15,12 @@ export class LoginComponent {
   password : string
 
   login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
-     this.router.navigate(["user"]);
-    }else {
+    if(this.username == 'admin' && this.password == 'admin')
+    {
+      this.router.navigate(['/user']);
+    }
+    else {
       alert("Invalid credentials");
     }
   }
-
 }
